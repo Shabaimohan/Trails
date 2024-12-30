@@ -32,5 +32,13 @@ module "route_table" {
   environment            = var.environment
 }
 
+module "vpg" {
+  source       = "./modules/virtualprivategateway"
+  vpc_ids      = { APP = module.vpc.vpc_ids[0], DB = module.vpc.vpc_ids[2] }
+  vpgs         = var.vpgs
+  environment  = var.environment
+}
+
+
 
 

@@ -41,4 +41,7 @@ output "route_table_associations" {
 }
 
 
-
+output "vpg_ids" {
+  description = "The IDs of all Virtual Private Gateways"
+  value       = module.vpg.vpg_ids
+}

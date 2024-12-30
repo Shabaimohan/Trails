@@ -156,6 +156,10 @@ variable "environment" {
 }
 
 variable "route_tables" {
+  type = map(object({
+    name     = string
+    vpc_name = string
+  }))
   description = "Map of route table definitions"
   default = {
     app_route_table = {
@@ -171,13 +175,14 @@ variable "route_tables" {
       vpc_name = "WEB"
     }
   }
-  type = map(object({
-    name     = string
-    vpc_name = string
-  }))
+  
 }
 
 variable "route_table_associations" {
+  type = map(object({
+    route_table_name = string
+    subnet_name      = string
+  }))
   description = "Map of route table associations"
   default = {
     assoc_1 = {
@@ -193,8 +198,23 @@ variable "route_table_associations" {
       subnet_name      = "web-subnet-1"
     }
   }
+  
+}
+
+variable "vpgs" {
   type = map(object({
-    route_table_name = string
-    subnet_name      = string
+    name     = string
+    vpc_name = string
   }))
+  description = "Map of Virtual Private Gateways keyed by name"
+  default = {
+    app_vpg = {
+      name     = "app-vpg"
+      vpc_name = "APP"
+    }
+    app_vpg2 = {
+      name     = "app-vpg2"
+      vpc_name = "DB"
+    }
+ }
 }
