@@ -39,6 +39,20 @@ module "vpg" {
   environment  = var.environment
 }
 
+module "tgw" {
+  source                       = "./modules/transistgateway"
+  name                         = var.transit_gateway.name
+  description                  = var.transit_gateway.description
+  auto_accept_shared_attachments = "enable"
+  default_route_table_association = "enable"
+  default_route_table_propagation = "enable"
+  vpc_attachments              = var.vpc_attachments
+  vpc_ids                      = { APP = module.vpc.vpc_ids[0], WEB = module.vpc.vpc_ids[1] }
+  subnet_ids                   = module.subnet.subnet_ids
+  environment                  = var.environment
+}
+
+
 
 
 

@@ -218,3 +218,28 @@ variable "vpgs" {
     }
  }
 }
+
+variable "transit_gateway" {
+  description = "Transit Gateway configuration"
+  default = {
+    name        = "Main-Transit-Gateway"
+    description = "Transit Gateway for all VPCs"
+  }
+}
+
+variable "vpc_attachments" {
+  description = "Map of VPC attachments"
+  default = {
+    attachment_1 = {
+      name         = "APP-TGW-Attachment"
+      vpc_name     = "APP"
+      subnet_names = ["app-subnet-1", "app-subnet-2"]
+    },
+    attachment_2 = {
+      name         = "WEB-TGW-Attachment"
+      vpc_name     = "WEB"
+      subnet_names = ["web-subnet-1", "web-subnet-2"]
+    }
+  }
+}
+
